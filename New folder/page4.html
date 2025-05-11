@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Color Mixer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+            transition: background-color 0.5s;
+        }
+        .slider {
+            width: 80%;
+            margin: 15px;
+        }
+        .color-value {
+            font-size: 18px;
+            font-weight: bold;
+        }
+        #colorBox {
+            width: 300px;
+            height: 150px;
+            border: 2px solid #000;
+            margin: 20px auto;
+            transition: background-color 0.3s;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Dynamic Color Mixer 🎨</h2>
+    
+    <label for="red">Red: <span id="redValue" class="color-value">0</span></label><br>
+    <input type="range" id="red" class="slider" min="0" max="255" value="0" oninput="updateColor()"><br>
+    
+    <label for="green">Green: <span id="greenValue" class="color-value">0</span></label><br>
+    <input type="range" id="green" class="slider" min="0" max="255" value="0" oninput="updateColor()"><br>
+    
+    <label for="blue">Blue: <span id="blueValue" class="color-value">0</span></label><br>
+    <input type="range" id="blue" class="slider" min="0" max="255" value="0" oninput="updateColor()"><br>
+    
+    <div id="colorBox"></div>
+
+    <script>
+        // Function to update the background color
+        function updateColor() {
+            // Getting values from sliders
+            let red = document.getElementById("red").value;
+            let green = document.getElementById("green").value;
+            let blue = document.getElementById("blue").value;
+
+            // Displaying the RGB values
+            document.getElementById("redValue").innerText = red;
+            document.getElementById("greenValue").innerText = green;
+            document.getElementById("blueValue").innerText = blue;
+
+            // Creating the RGB color string
+            let rgbColor = `rgb(${red}, ${green}, ${blue})`;
+
+            // Arrow function to update background color
+            const changeColor = (color) => {
+                document.getElementById("colorBox").style.backgroundColor = color;
+            };
+
+            // Calling the function to change color
+            changeColor(rgbColor);
+        }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Display Values</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin-top: 50px;
+      background-color: #f0f4f8;
+    }
+
+    input, button {
+      padding: 10px;
+      margin: 10px;
+      font-size: 16px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    #output {
+      margin-top: 20px;
+      font-size: 18px;
+      color: #333;
+      background: #fff;
+      padding: 15px;
+      display: inline-block;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+  </style>
+</head>
+<body>
+
+  <h2>📋 Enter Your Details</h2>
+
+  <input type="text" id="name" placeholder="Enter your name">
+  <br>
+  <input type="number" id="number" placeholder="Enter a number">
+  <br>
+  <button onclick="displayValues()">Show Values</button>
+
+  <div id="output"></div>
+
+  <script>
+    function displayValues() {
+      // 1. Declare a variable using let and assign your name
+      let myName = document.getElementById("name").value;
+
+      // 2. Create a number variable and add 10 to it
+      let myNumber = parseInt(document.getElementById("number").value) + 10;
+
+      // 3. Define a Boolean variable with a true value
+      let isStudent = true;
+
+      // 4. Print all values using console.log()
+      console.log("My Name:", myName);
+      console.log("My Number:", myNumber);
+      console.log("Boolean Value:", isStudent);
+
+      // Display the values on the webpage
+      document.getElementById("output").innerHTML = `
+          <p>My Name: <strong>${myName}</strong></p>
+          <p>My Number (plus 10): <strong>${myNumber}</strong></p>
+          <p>Boolean Value: <strong>${isStudent}</strong></p>
+      `;
+    }
+  </script>
+
+</body>
+</html>
