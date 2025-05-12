@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Control Flow & Loops</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+        }
+        input {
+            padding: 8px;
+            margin: 10px;
+            font-size: 16px;
+            width: 200px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        #output {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Hands-on Activity: JavaScript Control Flow & Loops</h2>
+    
+    <label for="number">Enter a number:</label>
+    <input type="number" id="number" placeholder="Enter a number">
+    <button onclick="checkEvenOdd()">Check Even or Odd</button>
+    
+    <button onclick="printNumbers()">Print 1 to 10</button>
+    <button onclick="countDown()">Count Down 5 to 1</button>
+
+    <div id="output"></div>
+
+    <script>
+        // Task 1: Check if a number is even or odd
+        function checkEvenOdd() {
+            let num = document.getElementById("number").value;
+            if (num % 2 === 0) {
+                document.getElementById("output").innerHTML = `${num} is Even.`;
+            } else {
+                document.getElementById("output").innerHTML = `${num} is Odd.`;
+            }
+        }
+
+        // Task 2: Print numbers from 1 to 10 using a for loop
+        function printNumbers() {
+            let output = "Numbers: ";
+            for (let i = 1; i <= 10; i++) {
+                output += i + " ";
+            }
+            document.getElementById("output").innerHTML = output;
+        }
+
+        // Task 3: Count down from 5 to 1 using a while loop
+        function countDown() {
+            let i = 5;
+            let output = "Countdown: ";
+            while (i >= 1) {
+                output += i + " ";
+                i--;
+            }
+            document.getElementById("output").innerHTML = output;
+        }
+    </script>
+
+</body>
+</html>
