@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>South Asian University Portal</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f0f0f0;
+    }
+    header {
+      background-color: #007bff;
+      color: white;
+      padding: 15px;
+      text-align: center;
+      font-size: 24px;
+      font-weight: bold;
+    }
+    .container {
+      padding: 20px;
+    }
+    .feature-box {
+      border: 2px solid #007bff;
+      background-color: #ffffff;
+      margin: 20px auto;
+      padding: 15px;
+      border-radius: 10px;
+      width: 90%;
+    }
+    input, select, button, textarea {
+      margin-top: 10px;
+      display: block;
+    }
+  </style>
+</head>
+<body>
+
+<header>South Asian University</header>
+<div class="container">
+
+  <!-- Bulb Toggle -->
+  <div class="feature-box">
+    <h2>💡 Bulb Toggle</h2>
+    <img id="bulbImage" src="https://www.w3schools.com/js/pic_bulboff.gif" width="150">
+    <button onclick="toggleBulb()" id="toggleButton">Turn ON</button>
+  </div>
+
+  <!-- Clock -->
+  <div class="feature-box">
+    <h2>⏰ Clock</h2>
+    <div id="clockDisplay">00:00:00</div>
+    <button onclick="toggleClock()" id="toggleClock">Start Clock</button>
+  </div>
+
+  <!-- Session Welcome -->
+  <div class="feature-box">
+    <h2>👋 Welcome</h2>
+    <input type="text" id="userName" placeholder="Enter your name" />
+    <button onclick="storeName()">Submit</button>
+    <div id="welcomeMessage"></div>
+  </div>
+
+  <!-- Preferences -->
+  <div class="feature-box">
+    <h2>⚙️ Preferences</h2>
+    <label>Theme:</label>
+    <select id="themeSelect">
+      <option value="light">Light</option>
+      <option value="dark">Dark</option>
+    </select>
+    <label>Font Size:</label>
+    <select id="fontSizeSelect">
+      <option value="16px">Small</option>
+      <option value="18px" selected>Medium</option>
+      <option value="22px">Large</option>
+    </select>
+    <button onclick="savePreferences()">Save Preferences</button>
+    <div id="demoText">This is a preview.</div>
+  </div>
+
+  <!-- Journal -->
+  <div class="feature-box">
+    <h2>📓 Daily Journal</h2>
+    <textarea id="journalEntry" placeholder="Write your entry..."></textarea>
+    <button onclick="saveEntry()">Save Entry</button>
+    <div id="entries"></div>
+  </div>
+
+  <!-- Notes -->
+  <div class="feature-box">
+    <h2>📝 Notes</h2>
+    <textarea id="noteInput" placeholder="Write your note..."></textarea>
+    <button onclick="saveNote()">Save</button>
+    <button onclick="clearNote()">Clear</button>
+    <div id="displayNote"></div>
+  </div>
+
+  <!-- Events -->
+  <div class="feature-box">
+    <h2>🧪 JS Events</h2>
+    <button id="colorButton">Click Me!</button>
+    <input type="text" id="keyLogger" placeholder="Type here..." />
+    <form id="myForm">
+      <input type="text" placeholder="Enter your name" />
+      <button type="submit">Submit Form</button>
+    </form>
+  </div>
+
+  <!-- Functions -->
+  <div class="feature-box">
+    <h2>➕ JS Functions</h2>
+    <input type="number" id="num" placeholder="Enter a number" />
+    <button onclick="calculateSquare()">Square</button>
+    <button onclick="addNumbers()">Add</button>
+    <button onclick="checkEvenOdd()">Even/Odd</button>
+    <div id="output"></div>
+  </div>
+
+  <!-- Color Mixer -->
+  <div class="feature-box">
+    <h2>🎨 Color Mixer</h2>
+    R: <input type="range" id="red" min="0" max="255" value="0" oninput="updateColor()" />
+    G: <input type="range" id="green" min="0" max="255" value="0" oninput="updateColor()" />
+    B: <input type="range" id="blue" min="0" max="255" value="0" oninput="updateColor()" />
+    <div id="colorBox" style="width:200px; height:100px; border:1px solid black; margin-top:10px;"></div>
+  </div>
+
+  <!-- Multiplication Table -->
+  <div class="feature-box">
+    <h2>🧮 Multiplication Table</h2>
+    <input type="number" id="tableInput" placeholder="Enter number">
+    <button onclick="generateTable()">Generate</button>
+    <div id="tableOutput"></div>
+  </div>
+
+  <!-- Grade Calculator -->
+  <div class="feature-box">
+    <h2>🎓 Grade Calculator</h2>
+    <input type="number" id="gradeInput" placeholder="Enter marks (%)" />
+    <button onclick="calculateGrade()">Calculate Grade</button>
+    <div id="gradeResult"></div>
+  </div>
+
+</div>
+
+<script>
+function toggleBulb() {
+  let bulb = document.getElementById('bulbImage');
+  let btn = document.getElementById('toggleButton');
+  if (bulb.src.includes('bulboff')) {
+    bulb.src = 'https://www.w3schools.com/js/pic_bulbon.gif';
+    btn.textContent = 'Turn OFF';
+  } else {
+    bulb.src = 'https://www.w3schools.com/js/pic_bulboff.gif';
+    btn.textContent = 'Turn ON';
+  }
+}
+
+let clockInterval;
+let clockRunning = false;
+function toggleClock() {
+  const display = document.getElementById('clockDisplay');
+  if (!clockRunning) {
+    clockInterval = setInterval(() => {
+      display.textContent = new Date().toLocaleTimeString();
+    }, 1000);
+    document.getElementById('toggleClock').textContent = 'Stop Clock';
+  } else {
+    clearInterval(clockInterval);
+    document.getElementById('toggleClock').textContent = 'Start Clock';
+  }
+  clockRunning = !clockRunning;
+}
+
+function storeName() {
+  const name = document.getElementById('userName').value;
+  if (!name) return alert('Please enter your name');
+  sessionStorage.setItem('userName', name);
+  document.getElementById('welcomeMessage').textContent = `Welcome, ${name}`;
+  document.getElementById('userName').style.display = 'none';
+}
+
+window.onload = function () {
+  let name = sessionStorage.getItem('userName');
+  if (name) {
+    document.getElementById('welcomeMessage').textContent = `Welcome back, ${name}`;
+    document.getElementById('userName').style.display = 'none';
+  }
+  loadPreferences();
+  displayNote();
+  loadEntries();
+};
+
+function savePreferences() {
+  const theme = document.getElementById('themeSelect').value;
+  const fontSize = document.getElementById('fontSizeSelect').value;
+  localStorage.setItem('theme', theme);
+  localStorage.setItem('fontSize', fontSize);
+  applyPreferences(theme, fontSize);
+}
+function loadPreferences() {
+  const theme = localStorage.getItem('theme') || 'light';
+  const fontSize = localStorage.getItem('fontSize') || '18px';
+  applyPreferences(theme, fontSize);
+}
+function applyPreferences(theme, fontSize) {
+  document.body.style.backgroundColor = theme === 'dark' ? '#222' : '#f0f0f0';
+  document.getElementById('demoText').style.fontSize = fontSize;
+}
+
+function saveEntry() {
+  const text = document.getElementById('journalEntry').value.trim();
+  if (!text) return alert('Write something');
+  let journal = JSON.parse(localStorage.getItem('journal')) || [];
+  journal.unshift({ content: text, date: new Date().toLocaleString() });
+  localStorage.setItem('journal', JSON.stringify(journal));
+  document.getElementById('journalEntry').value = '';
+  loadEntries();
+}
+function loadEntries() {
+  const journal = JSON.parse(localStorage.getItem('journal')) || [];
+  const container = document.getElementById('entries');
+  container.innerHTML = journal.map(entry => `<div><time>${entry.date}</time><p>${entry.content}</p></div>`).join('') || 'No entries yet';
+}
+
+function saveNote() {
+  const note = document.getElementById('noteInput').value;
+  localStorage.setItem('savedNote', note);
+  displayNote();
+}
+function clearNote() {
+  localStorage.removeItem('savedNote');
+  displayNote();
+}
+function displayNote() {
+  const note = localStorage.getItem('savedNote');
+  document.getElementById('displayNote').innerHTML = note || 'No note saved.';
+}
+
+document.getElementById('colorButton').addEventListener('click', () => {
+  document.getElementById('colorButton').classList.toggle('active');
+});
+document.getElementById('keyLogger').addEventListener('keydown', e => {
+  console.log('Key Pressed:', e.key);
+});
+document.getElementById('myForm').addEventListener('submit', e => {
+  e.preventDefault();
+  alert('Form submission prevented!');
+});
+
+function calculateSquare() {
+  const num = document.getElementById('num').value;
+  document.getElementById('output').innerText = `Square: ${num * num}`;
+}
+function addNumbers() {
+  let a = +prompt('Enter first number');
+  let b = +prompt('Enter second number');
+  document.getElementById('output').innerText = `Sum: ${a + b}`;
+}
+function checkEvenOdd() {
+  const num = document.getElementById('num').value;
+  document.getElementById('output').innerText = num % 2 === 0 ? 'Even' : 'Odd';
+}
+
+function updateColor() {
+  const r = document.getElementById('red').value;
+  const g = document.getElementById('green').value;
+  const b = document.getElementById('blue').value;
+  document.getElementById('colorBox').style.backgroundColor = `rgb(${r},${g},${b})`;
+}
+
+function generateTable() {
+  const num = parseInt(document.getElementById('tableInput').value);
+  if (isNaN(num)) return alert('Enter a valid number');
+  let html = '<ul>';
+  for (let i = 1; i <= 10; i++) {
+    html += `<li>${num} × ${i} = ${num * i}</li>`;
+  }
+  html += '</ul>';
+  document.getElementById('tableOutput').innerHTML = html;
+}
+
+function calculateGrade() {
+  const marks = parseFloat(document.getElementById('gradeInput').value);
+  let grade;
+  if (isNaN(marks) || marks < 0 || marks > 100) {
+    grade = 'Enter a valid percentage (0–100)';
+  } else if (marks >= 90) grade = 'A+';
+  else if (marks >= 80) grade = 'A';
+  else if (marks >= 70) grade = 'B';
+  else if (marks >= 60) grade = 'C';
+  else if (marks >= 50) grade = 'D';
+  else grade = 'F';
+  document.getElementById('gradeResult').innerText = `Grade: ${grade}`;
+}
+</script>
+
+</body>
+</html>
